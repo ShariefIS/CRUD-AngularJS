@@ -1,2 +1,2 @@
-# CRUD-AngularJS
-CRUD operations on static data
+# Internship Assignment
+Emergency services front End
