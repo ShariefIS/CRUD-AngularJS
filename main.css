@@ -1,0 +1,97 @@
+body{
+    font-size: 14px!important
+}
+::placeholder{
+    color: #8f8a8a !important;
+    font-size: x-small!important;
+}
+#time{
+    border-radius:5px;
+    background-color:#b1cfff!important;
+    color:#4080e7;
+    width: 80px;
+    text-align: center;
+}
+label{
+    color: grey;
+    font-size: smaller;
+}
+input,select{
+    background-color: transparent !important;
+    border-top: 0ch!important;
+    border-left: 0ch!important;
+    border-right: 0ch!important;
+}
+.card-header{
+    
+padding-right: 10px !important;
+padding-left: 10px !important;
+}
+.card-body,.card-footer,.list-group-item {
+    
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+
+}
+@font-face {
+    font-family: 'icofont';
+    src: url('fonts/icofont.eot?v=1.0.0-beta');
+    src: url('fonts/icofont.eot?v=1.0.0-beta#iefix') format('embedded-opentype'),
+    url('fonts/icofont.ttf?v=1.0.0-beta') format('truetype'),
+    url('fonts/icofont.woff?v=1.0.0-beta') format('woff'),
+    url('fonts/icofont.svg?v=1.0.0-beta#icofont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.icofont {
+    font-family: 'IcoFont' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icofont-map:before{
+    font-size: 2.2em;color:#4270c6; content:"\ed44";
+}
+.icofont-ambulance-cross:before {
+	font-size: 2.2em;content: "\eed3";
+}
+.icofont-fire-truck-alt:before {
+	font-size: 2.5em;content: "\eee5";
+}
+.icofont-police-car:before {
+    font-size: 1.5em;
+    content: "\eeef";
+}
+/*Fixed Width Icons*/
+.icofont-fw {
+    width: 1.28571429em;
+    text-align: center;
+}
+
+/*Custom list icons*/
+.icofont-ul {
+    padding-left: 0;
+    margin-left: 2.14285714em;
+    list-style-type: none;
+}
+.icofont-ul>li {
+    position: relative;
+}
+.icofont-li {
+    position: absolute;
+    left: -2.14285714em;
+    width: 2.14285714em;
+    top: .14285714em;
+    text-align: center;
+}
+

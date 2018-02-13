@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Indian Emergency Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body ng-app="myApp" ng-controller="myCntrl" style="background-color:#edf1f4">
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">Indian Emergency Service</a>
+
+    </nav>
+    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.426509717452!2d78.42870354205752!3d17.391307618371254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe6dd99b47b8c1ed0!2sPremier+Hospital!5e0!3m2!1sen!2sin!4v1518030502892" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+    <div class="row m-3">
+        <div class="col-md-4">
+                {{data}}
+            <div class="card" style="background-color:#efebe8;top:7px">
+                <div class="card-header clearfix">
+                    <span class="float-left">
+                        <h4>Emergency</h4>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <form name="emgFomr">
+                        <div class="form-group">
+                            <label for="typemg">TYPE OF EMERGENCY&nbsp;</label>
+                            <select ng-model="typemg" ng-options="e for e in emrg" class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">NAME</label>
+                            <input ng-model="name" placeholder="Enter Name" class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="phn">PHONE NUMBER</label>
+                            <input ng-model="phn" placeholder="+91-" class="form-control" type="number">
+                        </div>
+                        <div class="form-group">
+                            <label for="addr">ADDRESS</label>
+                            <input ng-model="addr" placeholder="Address Line 1" class="form-control" type="text">
+                            <input ng-model="addr2" placeholder="Address Line 2" class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="landm">LANDMARK</label>
+                            <input ng-model="landm" placeholder="Enter Landmark" class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="pin">PIN-CODE</label>
+                            <input ng-model="pin" placeholder="Ex: 500028" class="form-control" type="number">
+                        </div>
+                        <label>SEND ALERT TO</label>
+                        <br>
+                        <div class="custom-control custom-control-inline custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" ng-model="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Ambulance</label>
+                        </div>
+                        <div class="custom-control custom-control-inline custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck2" ng-model="customCheck2">
+                            <label class="custom-control-label" for="customCheck2">Police</label>
+                        </div>
+                        <div class="custom-control custom-control-inline custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck3" ng-model="customCheck3">
+                            <label class="custom-control-label" for="customCheck3">Fire Station</label>
+                        </div>
+
+                        <div class="form-inline">
+                            <!-- purely semantic -->
+                            <label>No. of
+                                <span ng-show="customCheck1">&nbsp; Ambulance&nbsp;</span>
+                                <span ng-show="customCheck2">&nbsp;Police&nbsp;</span>
+                                <span ng-show="customCheck3">&nbsp;Fire Station</span>
+                            </label>
+                            <input style="width:45px" class="form-control-sm" type="text" ng-model="counter">
+                            <div class="btn-group btn-block" role="group" style="width:100px" aria-label="plus-minus">
+                                <button type="button" ng-click="counter=counter-1" class="btn btn-sm btn-danger minus-button merge-top-left-button" ng-disabled="counter==0">
+                                    <b>&minus;</b>
+                                </button>
+                                <button type="button" ng-click="counter=counter+1"class="btn btn-sm btn-success plus-button merge-top-right-button"ng-disabled="counter==10">
+                                    <b>&plus;</b>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="form-control btn-warning" type="reset">RESET</button>
+                        <button ng-click="Save()" class="form-control btn btn-danger " type="submit">START EMERGENCY</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="clearfix">
+                <h1 class="float-left">Active Emergencies</h1>
+                <a class="float-right" style="text-decoration:underline" href="#">View all emergencies-></a>
+            </div>
+            <div class="d-flex justify-content-center flex-wrap ">
+                <!-- " d-flex justify-content-around flex-wrap //// card-columns "> -->
+                <div style="width:380px" class="card m-1">
+                    <div class="card-header clearfix">
+                        <strong class="float-left">
+                            <small>
+                                <b> STARTED AT 1:00 AM</b>
+                            </small>
+                        </strong>&nbsp;
+                        <input type="text" id="time" value="16:10" readonly>
+                        <button class="btn-outline-danger float-right">Cancel</button>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <p class="card-text">
+                                    <strong>John doe</strong>
+                                    <i class=" float-right icofont icofont-map"></i>
+                                    <br> Phone Number: +91 999 666 3333
+                                    <br> Address: Line1
+                                    <br> line 2
+                                    <br>
+                                    <strong>Emergency :</strong>&nbsp; Accident
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                Request Pending &nbsp;
+                                <i class="icofont icofont-ambulance-cross"></i>&nbsp;
+                                <!-- <i class="icofont icofont-police-car"></i>&nbsp; -->
+                                <i class="icofont icofont-fire-truck-alt"></i>&nbsp;
+                            </li>
+                        </ul>
+                        <div class="card-footer">
+                            <p class="card-text">
+                                <strong>ACCEPTED AT</strong> : 01:12 AM &nbsp; &nbsp;
+                                <i class="icofont icofont-ambulance-cross"></i>&nbsp;
+                                <br>
+                                <input type="text" id="time" value="16:10:00 sec" readonly>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="width:380px" class="card m-1">
+                    <div class="card-header clearfix">
+                        <strong class="float-left">
+                            <small>STARTED AT 1:00 AM</small>
+                        </strong>&nbsp;
+                        <input type="text" id="time" value="16:10" readonly>
+                        <button class="btn-outline-danger float-right">Cancel</button>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <strong>John doe</strong>
+                            <br> Phone Number: +91 999 666 3333
+                            <br> Address: Line1
+                            <br> line 2
+                            <br>
+                            <strong>Emergency :</strong>&nbsp; Accident
+                        </p>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+                <div style="width:380px" class="card m-1">
+                    <div class="card-header clearfix">
+                        <strong class="float-left">
+                            <small>
+                                <b> STARTED AT 1:00 AM</b>
+                            </small>
+                        </strong>
+                        &nbsp;
+                        <input type="text" id="time" value="16:10" readonly>
+                        <button class="btn-outline-danger float-right">Cancel</button>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <strong>John doe</strong>
+                            <br> Phone Number: +91 999 666 3333
+                            <br> Address: Line1
+                            <br> line 2
+                            <br>
+                            <strong>Emergency :</strong>&nbsp; Accident
+                        </p>
+                        <br>
+                        <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+                <div style="width:380px" class="card m-1">
+                    <div class="card-header clearfix">
+                        <strong class="float-left">
+                            <small>
+                                <b> STARTED AT 1:00 AM</b>
+                            </small>
+                        </strong>
+                        <button class="btn-outline-danger float-right">Cancel</button>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <p class="card-text">
+                                    <strong>John doe</strong>
+                                    <br> Phone Number: +91 999 666 3333
+                                    <br> Address: Line1
+                                    <br> line 2
+                                    <br>
+                                    <strong>Emergency :</strong>&nbsp; Accident
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="icofont icofont-ambulance-cross"></i>&nbsp;
+                                <i class="icofont icofont-police-car"></i>&nbsp;
+                                <i class="icofont icofont-fire-truck-alt"></i>&nbsp;
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+                <div style="width:380px" class="card m-1">
+                    <div class="card-header clearfix">
+                        <strong class="float-left">
+                            <small>
+                                <b> STARTED AT 1:00 AM</b>
+                            </small>
+                        </strong>
+                        <button class="btn-outline-danger float-right">Cancel</button>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <p class="card-text">
+                                    <strong>John doe</strong>
+                                    <br> Phone Number: +91 999 666 3333
+                                    <br> Address: Line1
+                                    <br> line 2
+                                    <br>
+                                    <strong>Emergency :</strong>&nbsp; Accident
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="icofont icofont-ambulance-cross"></i>&nbsp;
+                                <i class="icofont icofont-police-car"></i>&nbsp;
+                                <i class="icofont icofont-fire-truck-alt"></i>&nbsp;
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+           
+                
+             
+            <!-- <img src="1.jpg" alt=""> -->
+        </div>
+</body>
+
+</html>
